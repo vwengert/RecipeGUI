@@ -1,4 +1,4 @@
-set(Test creatorTesting)
+set(Test recipeGuiTests)
 
 add_executable(${Test} main.cpp)
 

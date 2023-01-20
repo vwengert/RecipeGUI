@@ -6,6 +6,7 @@ Window {
     width: 640
     height: 480
     visible: true
+    color: "#797979"
     title: qsTr("Hello World")
 
     InputPanel {

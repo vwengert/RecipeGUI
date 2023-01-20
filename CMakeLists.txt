@@ -11,17 +11,15 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
-
 find_package(Qt6 REQUIRED COMPONENTS Quick Widgets)
 
 set(PROJECT_SOURCES
     main.cpp
 )
 
+add_subdirectory(recipeApi)
+
 qt_add_executable(${PROJECT_NAME}
-#    MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
 
@@ -33,6 +31,7 @@ qt_add_qml_module(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     Qt6::Quick
+    recipeApi
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -46,8 +45,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 install(TARGETS ${PROJECT_NAME}
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-#qt_finalize_executable(${PROJECT_NAME})
 
 enable_testing()
 
