@@ -1,0 +1,34 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=q30ß49u5wcv90e4ß23b45
+      - MYSQL_USER=recipemanager
+      - MYSQL_PASSWORD=ßjf23j4w34rtsdr
+      - MYSQL_DATABASE=food
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+
+  food:
+    image: bertolux/food:latest
+    container_name: food
+    restart: always
+    depends_on:
+      - mariadb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://localhost:3306/food
+      - SPRING_DATASOURCE_USERNAME=recipemanager
+      - SPRING_DATASOURCE_PASSWORD=ßjf23j4w34rtsdr
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.mariadb.jdbc.Driver
+      - SPRING_JPA_HIBERNATE_DDLAUTO=update
+      - SPRING_MVC_SERVLET_PATH=/food
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MariaDBDialect
+    ports:
+      - "8080:8080"
+
+volumes:
+  data:
